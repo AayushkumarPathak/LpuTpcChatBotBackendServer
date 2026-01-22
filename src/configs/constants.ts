@@ -1,8 +1,8 @@
 
-export const UNIVERSITY_NAME = "Global University of Excellence";
-export const TPC_OFFICE_HOURS = "Monday to Friday, 10:00 AM - 5:00 PM";
+export const UNIVERSITY_NAME = "Lovely Professional University";
+export const TPC_OFFICE_HOURS = "Monday to Friday, 9:00 AM - 5:00 PM";
 export const TPC_CONTACT_EMAIL = "tpc-support@globaluniv.edu";
-export const TPC_LOCATION = "Academic Block A, Ground Floor, Room 102";
+export const TPC_LOCATION = "Block 33-204";
 
 // The raw policy data. In a real-world application, this could be fetched from a database.
 const PLACEMENT_POLICIES_DATA = [
