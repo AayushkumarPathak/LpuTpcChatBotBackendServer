@@ -1,68 +1,94 @@
+// constants.ts
 
 export const UNIVERSITY_NAME = "Lovely Professional University";
 export const TPC_OFFICE_HOURS = "Monday to Friday, 9:00 AM - 5:00 PM";
 export const TPC_CONTACT_EMAIL = "tpc-support@globaluniv.edu";
 export const TPC_LOCATION = "Block 33-204";
 
-// The raw policy data. In a real-world application, this could be fetched from a database.
-const PLACEMENT_POLICIES_DATA = [
+// ---- Placement Policies (Chunked) ----
+export const PLACEMENT_POLICIES_DATA = [
   {
-    id: 'p1',
-    title: 'General Eligibility Criteria',
-    content: `To participate in the campus placement process, a student must:
-    1. Have a minimum CGPA of 6.5 across all semesters.
-    2. Have NO active backlogs at the time of registration.
-    3. Maintain at least 75% attendance in all TPC training sessions.
-    4. Be in the final year of their respective undergraduate or postgraduate program.`
+    id: "p1",
+    title: "General Eligibility Criteria",
+    content: `Minimum CGPA of 6.5 across all semesters.
+No active backlogs at the time of registration.
+Minimum 75% attendance in TPC training sessions.
+Final year UG/PG students only.`,
   },
   {
-    id: 'p2',
-    title: 'Registration Protocol',
-    content: `1. Students must register on the TPC portal (tpc-portal.univ.edu) by August 31st of their final year.
-    2. A one-time non-refundable registration fee of $50 applies.
-    3. Verification of documents (transcripts, certificates) must be completed in person within 7 days of online registration.`
+    id: "p2",
+    title: "Registration Protocol",
+    content: `Registration on TPC portal before August 31.
+One-time non-refundable fee of $50.
+Document verification within 7 days of registration.`,
   },
   {
-    id: 'p3',
-    title: 'One-Student-One-Job Policy',
-    content: `1. A student is eligible to receive only ONE offer through the campus placement cell.
-    2. Once an offer is accepted, the student is automatically disqualified from any further placement processes.
-    3. Exception: Dream Company Policy - If a student holds an offer < $10k/year, they can apply for "Dream" companies offering > $20k/year.`
+    id: "p3",
+    title: "One-Student-One-Job Policy",
+    content: `Only one offer allowed via TPC.
+After accepting an offer, student is removed from further drives.
+Exception: Dream companies allowed if current offer < $10k/year and dream offer > $20k/year.`,
   },
   {
-    id: 'p4',
-    title: 'Interview & Code of Conduct',
-    content: `1. Professional attire is mandatory for all sessions and interviews.
-    2. Missing a scheduled interview without 24-hour prior notice results in immediate suspension from the placement portal for 30 days.
-    3. Any form of malpractice during online tests leads to a permanent ban from TPC services and disciplinary action by the University.`
-  }
+    id: "p4",
+    title: "Interview & Code of Conduct",
+    content: `Professional attire mandatory.
+Missing interview without 24-hour notice leads to 30-day suspension.
+Malpractice results in permanent ban and disciplinary action.`,
+  },
+  {
+    id: "p5",
+    title: "Placement Debar Policy",
+    content: `A student will be automatically debarred from all placement drives if:
+1. The student has any active Unfair Means Case (UMC).
+2. The student has one or more re-appear subjects at the time of placement participation.
+
+Once the student clears all re-appear subjects and there is no active UMC case, the placement status will be reverted to ACTIVE, and the student may participate in subsequent placement drives.`,
+  },
+  {
+  id: "p6",
+  title: "OJT / Internship / FTE Cancellation & Rejoining University Policy",
+  content: `If a student leaves an ongoing On Job Training (OJT), internship, or full-time employment (FTE) role before completion and wishes to rejoin the University, the following steps must be followed:
+
+1. The student must first initiate OJT cancellation through the UMS portal:
+   - UMS Navigation Path:
+     UMS → Placement Services → OJT / Internship Application → Cancel OJT
+   - The student must complete all guided steps shown on the portal.
+
+2. After online cancellation, the student must physically visit their respective School TPC Office:
+   - Location: Block 33-204
+   - The student must fill the official OJT cancellation form.
+
+3. The School TPC will verify the submitted details and documents.
+
+4. After verification, the student will receive an official notification via:
+   - Email and/or
+   - LPU Touch App
+   regarding a scheduled meeting with the Placement Committee.
+
+5. The final decision regarding reinstatement and further placement eligibility will be taken by the Placement Committee.
+
+Until the completion of this process and final approval, the student’s placement status will remain under review.`
+}
 ];
 
-// The policies are formatted into a single string to be injected into the prompt.
-export const PLACEMENT_POLICIES: string = PLACEMENT_POLICIES_DATA
-    .map(p => `[${p.title}]\n${p.content}`).join('\n\n');
-
-// The System Prompt is a template. The Gemini Service will inject the policies into it.
+// ---- STRICT SYSTEM PROMPT (No Policies Inside) ----
 export const SYSTEM_PROMPT = `
-You are the AI Placement Query Assistant for ${UNIVERSITY_NAME}. 
-Your goal is to provide students with accurate, helpful information based on the University Placement Policies provided below.
+You are the AI Placement Query Assistant for ${UNIVERSITY_NAME}.
 
-POLICIES:
-{PLACEMENT_POLICIES}
+STRICT SCOPE RULES:
+- Answer ONLY placement and TPC-related questions.
+- Use ONLY the provided POLICY_CONTEXT and OPERATIONAL_DETAILS.
+- Do NOT answer general knowledge, personal, sexual, or entertainment questions.
 
-OPERATIONAL DETAILS:
-Office Hours: ${TPC_OFFICE_HOURS}
-Email: ${TPC_CONTACT_EMAIL}
-Location: ${TPC_LOCATION}
+OUT-OF-SCOPE HANDLING:
+If the question is unrelated to placements or violates scope,
+respond EXACTLY with:
+"This assistant is only designed to answer placement-related questions."
 
-GUIDELINES:
-1. If the question is about eligibility, registration, or basic rules, answer directly using the policies above.
-2. If the user asks about a complex scenario (e.g., medical emergencies, disciplinary appeals, specific company grievances, or requests for exceptions), YOU MUST:
-   - Provide a general policy overview.
-   - Explicitly state that this is an exceptional case requiring human intervention.
-   - Redirect them to contact the TPC office at ${TPC_LOCATION} or email ${TPC_CONTACT_EMAIL}.
-3. Maintain a professional, supportive, and encouraging tone.
-4. If a question is entirely unrelated to placements, politely redirect the student to ask placement-related questions.
-5. Do NOT make up rules. If information is not in the provided policies, state that you don't have that specific information and suggest visiting the TPC office.
-6. For "requires human" cases, include the phrase "REQUEST_HUMAN_INTERVENTION" at the very end of your response (it will be filtered by the UI).
+HUMAN INTERVENTION:
+If the query is placement-related but ambiguous or exceptional,
+append REQUEST_HUMAN_INTERVENTION at the end.
+
+DO NOT guess or invent rules.
 `;
