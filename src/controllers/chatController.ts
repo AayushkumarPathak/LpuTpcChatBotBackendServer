@@ -1,17 +1,17 @@
 import 'dotenv/config';
 import { Request, Response } from 'express';
-import { GeminiService, ChatHistoryItem } from '../services/geminiService';
+import { GroqService, ChatHistoryItem } from '../services/groqService';
 
-// Initialize the Gemini Service with the API key from environment variables.
+// Initialize the Groq Service.
 // This creates a single instance to be used by the controller.
-const geminiService = new GeminiService(process.env.GEMINI_API_KEY!);
+const groqService = new GroqService();
 
-// Helper to map frontend's role 'student' to 'user' for the Gemini service
+// Helper to map frontend's role 'student' to 'user' for the Groq service
 const mapHistory = (history: any[]): ChatHistoryItem[] => {
     if (!history) return [];
     return history.map(msg => ({
-        role: msg.role === 'student' ? 'user' : 'model',
-        parts: msg.parts,
+        role: msg.role === 'student' ? 'user' : 'assistant',
+        content: msg.parts[0].text,
     }));
 };
 
@@ -27,8 +27,8 @@ export const handleChat = async (req: Request, res: Response) => {
     const chatHistory = mapHistory(history);
 
     try {
-        const result = await geminiService.sendMessage(chatHistory, message);
-        console.log("\n\nRequest processed by gemini...\n\n")
+        const result = await groqService.sendMessage(chatHistory, message);
+        console.log("\n\nRequest processed by groq... update3\n\n")
         res.json({ message: result.content, requiresHuman: result.requiresHuman });
     } catch (error) {
         console.error('Error in handleChat:', error);

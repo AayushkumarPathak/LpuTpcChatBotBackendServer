@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 // Enable CORS for frontend origin
 app.use(cors({
-  origin: 'https://tpc-chatbot-lpu.vercel.app',
+  origin: ["http://localhost:5173", "https://tpc-chatbot-lpu.vercel.app"],
   credentials: true
 }));
 app.use(express.json());
