@@ -1,6 +1,6 @@
 // constants.ts
 
-import 'dotenv/config';
+import "dotenv/config";
 
 export const GROQ_API_KEY = process.env.GROQ_API_KEY;
 export const GROQ_MODEL = "llama-3.1-8b-instant";
@@ -51,9 +51,9 @@ Malpractice results in permanent ban and disciplinary action.`,
 Once the student clears all re-appear subjects and there is no active UMC case, the placement status will be reverted to ACTIVE, and the student may participate in subsequent placement drives.`,
   },
   {
-  id: "p6",
-  title: "OJT / Internship / FTE Cancellation & Rejoining University Policy",
-  content: `If a student leaves an ongoing On Job Training (OJT), internship, or full-time employment (FTE) role before completion and wishes to rejoin the University, the following steps must be followed:
+    id: "p6",
+    title: "OJT / Internship / FTE Cancellation & Rejoining University Policy",
+    content: `If a student leaves an ongoing On Job Training (OJT), internship, or full-time employment (FTE) role before completion and wishes to rejoin the University, the following steps must be followed:
 
 1. The student must first initiate OJT cancellation through the UMS portal:
    - UMS Navigation Path:
@@ -73,7 +73,7 @@ Once the student clears all re-appear subjects and there is no active UMC case, 
 
 5. The final decision regarding reinstatement and further placement eligibility will be taken by the Placement Committee.
 
-Until the completion of this process and final approval, the student’s placement status will remain under review.`
+Until the completion of this process and final approval, the student’s placement status will remain under review.`,
   },
   {
     id: "p7",
@@ -83,8 +83,36 @@ Until the completion of this process and final approval, the student’s placeme
 1. **Online via RMS**: Raise a request on UMS > RMS > Category: PEP Classes. You must upload supporting documents.
 2. **Offline via TPC Office**: Visit the TPC Office to submit an offline form along with the offer letter or evidence document.
 
-The request will be reviewed for exemption.`
-}
+The request will be reviewed for exemption.`,
+  },
+  {
+    id: "p8",
+title: "Company-Specific Placement Drive Policy",
+content: `If a student is not placed and did not receive registration for an eligible placement drive due to a valid reason (for example: last semester status or academic issues), follow this process:
+
+1. Ask clarifying questions to understand the situation:
+   a) Does the student have a re-appear/backlog in any subject?
+   b) Is the student currently in the final semester of the program?
+
+2. If the student has a re-appear/backlog:2
+   Explain that placement eligibility is governed by university placement policies. In such cases, exceptions generally cannot be made. Students are advised to clear their academic backlogs and maintain consistent academic performance to remain eligible for future opportunities.
+
+3. If the student is in the final semester:
+   Suggest the student visit the TPC office in person at Block 33, Room 203 or 204. The student can request the authorities to review their case and consider allowing registration for the required placement drive.`
+  },
+  {
+    id: "p9",
+title: "CAPSTONE Project Section Change (OJT/Internship Return Students Only)",
+content: `If a student asks about changing their CAPSTONE project section, first ask the following clarification question:
+
+1. Did the student return to regular classes after completing OJT (On-Job Training) or Internship?
+
+2. If the student returned after OJT/Internship:
+   Inform the student that a section change may be possible only if seats are available in the desired section. The student must first consult the CAPSTONE mentor of that section and obtain their permission. After receiving approval, the student should visit Block 30, Room 310 to request the authorities to process the section change.
+
+3. If the student has been attending CAPSTONE classes regularly since the beginning of the 7th semester:
+   Inform the student that section changes are not allowed once the CAPSTONE project has started, even for valid reasons.`
+  }
 ];
 
 // ---- STRICT SYSTEM PROMPT (No Policies Inside) ----

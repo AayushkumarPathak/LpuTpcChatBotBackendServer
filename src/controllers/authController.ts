@@ -3,13 +3,8 @@ import User from '../models/User';
 import jwt from 'jsonwebtoken';
 import Admin, { IAdmin } from '../models/Admin';
 import bcrypt from 'bcryptjs';
+import { generateDefaultPassword } from '../utils/utils';
 
-// Helper to generate default password
-const generateDefaultPassword = (name: string, dob: string) => {
-    const namePart = name.substring(0, 4).toUpperCase();
-    const dobPart = dob.replace(/-/g, ''); // YYYY-MM-DD -> YYYYMMDD
-    return `${namePart}${dobPart}`;
-};
 // @desc   Register a new admin
 // @route  POST /api/auth/admin/register
 export const registerAdmin = async (req: Request, res: Response) => {

@@ -24,6 +24,9 @@ export class GroqService {
   private groq: Groq;
   private model = GROQ_MODEL;
 
+  /**
+   * TODO: Handle deployment failures due to missing env
+  */
   constructor() {
     if (!GROQ_API_KEY) throw new Error("Groq API key missing");
     this.groq = new Groq({ apiKey: GROQ_API_KEY });
