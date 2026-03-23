@@ -5,8 +5,9 @@ import Admin, { IAdmin } from '../models/Admin';
 import bcrypt from 'bcryptjs';
 import { generateDefaultPassword } from '../utils/utils';
 
-// @desc   Register a new admin
+// @desc   Register a new admin (Admin only - requires authentication)
 // @route  POST /api/auth/admin/register
+// @access Private (Admin only)
 export const registerAdmin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -56,10 +57,11 @@ export const loginAdmin = async (req: Request, res: Response) => {
     }
 };
 
-// @desc   Register multiple users (Admin only)
+// @desc   Register multiple users (Admin only - requires authentication)
 // @route  POST /api/auth/register-bulk
+// @access Private (Admin only)
 export const registerBulk = async (req: Request, res: Response) => {
-    // Assuming req.user.role === 'admin' from auth middleware
+    // req.admin is set by protectAdmin middleware
     const usersData: { regNo: string, name: string, dob: string }[] = req.body;
 
     if (!usersData || !Array.isArray(usersData)) {

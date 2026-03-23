@@ -1,17 +1,18 @@
 // /server/src/routes/auth.ts
 import express from 'express';
 import { registerBulk, login, registerAdmin, loginAdmin } from '../controllers/authController';
-import { protect, admin } from '../middlewares/authMiddleware';
+import { protectAdmin } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 
-// router.post('/register-bulk', protect, admin, registerBulk);
-
-// Admin registration and login
-router.post('/admin/register', registerAdmin);
+// Admin routes
 router.post('/admin/login', loginAdmin);
+router.post('/admin/register', protectAdmin, registerAdmin); // Only authenticated admins can create new admins
 
-router.post('/register-bulk', registerBulk);
+// Bulk student registration (Admin only)
+router.post('/register-bulk', protectAdmin, registerBulk);
+
+// Student login
 router.post('/login', login);
 
 export default router;
