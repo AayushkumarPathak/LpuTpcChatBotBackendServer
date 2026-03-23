@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - tpc-chatbot-beta
 on:
   push:
     branches:
-      - beta-tst
+      - mainline
   workflow_dispatch:
 
 jobs:
