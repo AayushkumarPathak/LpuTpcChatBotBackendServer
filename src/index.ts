@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import authRouter from './routes/auth';
 import chatRouter from './routes/chat';
+import adminRouter from './routes/admin';
+import studentRouter from './routes/student';
 
 import express from 'express';
 import dotenv from 'dotenv';
@@ -19,6 +21,8 @@ app.use(express.json());
 // Mount authentication routes
 app.use('/api/auth', authRouter);
 app.use('/api/chat', chatRouter);
+app.use('/api/student', studentRouter);
+app.use('/api/admin', adminRouter);
 const port = process.env.PORT || 3000;
 
 // Connect to MongoDB

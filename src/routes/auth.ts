@@ -11,7 +11,7 @@ router.post('/admin/register', protectAdmin, registerAdmin); // Only authenticat
 
 // Bulk student registration (Admin only)
 router.post('/register-bulk', protectAdmin, registerBulk);
-
+router.post('/upadteStudent', protectAdmin, )
 // Student login
 router.post('/login', login);
 
